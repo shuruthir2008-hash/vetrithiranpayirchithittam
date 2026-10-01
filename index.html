@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}ComicCraft - Create{% endblock %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">AI COMIC STORY CREATOR</p>
+  <h1>Bring your story to life.</h1>
+  <p class="lead">Describe your idea, choose the mood and art style, and ComicCraft builds a five-panel comic.</p>
+</section>
+
+<form class="card form-card" action="/generate" method="post" id="comic-form">
+  <label for="story_prompt">Story Prompt</label>
+  <textarea id="story_prompt" name="story_prompt" maxlength="2000" required
+    placeholder="A brave fox exploring an enchanted forest..."></textarea>
+
+  <div class="grid two">
+    <div>
+      <label for="character_name">Main Character Name</label>
+      <input id="character_name" name="character_name" maxlength="80" required placeholder="Lumi">
+    </div>
+    <div>
+      <label for="setting">Setting</label>
+      <input id="setting" name="setting" maxlength="120" required placeholder="Enchanted forest">
+    </div>
+  </div>
+
+  <div class="grid two">
+    <div>
+      <label for="tone">Story Tone</label>
+      <select id="tone" name="tone">
+        <option>light-hearted</option>
+        <option>dramatic</option>
+        <option>poetic</option>
+        <option>funny</option>
+        <option>adventurous</option>
+      </select>
+    </div>
+    <div>
+      <label for="art_style">Art Style</label>
+      <select id="art_style" name="art_style">
+        <option>comic book</option>
+        <option>anime</option>
+        <option>pixel art</option>
+        <option>realistic</option>
+        <option>watercolor</option>
+      </select>
+    </div>
+  </div>
+
+  <button class="button primary" type="submit" id="submit-button">Create Comic</button>
+  <p class="hint">Real AI generation can take several minutes when Stable Diffusion is running locally.</p>
+</form>
+{% endblock %}

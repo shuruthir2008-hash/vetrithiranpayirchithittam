@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}ComicCraft - Preview{% endblock %}
+{% block content %}
+<section class="hero compact">
+  <p class="eyebrow">COMIC PREVIEW</p>
+  <h1>{{ title }}</h1>
+  <p class="lead">Review the generated panels before downloading your PDF.</p>
+</section>
+
+<div class="actions">
+  <button class="button primary" type="button" id="download-pdf" data-download-url="/download?path={{ pdf_path | urlencode }}">Download Your Comic as PDF</button>
+  <a class="button secondary" href="/">Create Another</a>
+</div>
+
+<section class="panels">
+{% for panel in layout %}
+  <article class="panel card">
+    <div class="panel-header">
+      <span class="panel-number">Panel {{ panel.panel_number }}</span>
+      <h2>{{ panel.title }}</h2>
+    </div>
+    <img src="{{ panel.image_path }}" alt="Illustration for {{ panel.title }}" loading="lazy">
+    <p class="scene"><em>{{ panel.scene_description }}</em></p>
+    <div class="text-block">
+      <strong>Caption</strong>
+      <p>{{ panel.caption }}</p>
+      <strong>Narration</strong>
+      <p>{{ panel.narration }}</p>
+      {% if panel.dialogue %}
+        <strong>Dialogue</strong>
+        {% for line in panel.dialogue %}
+          <p class="dialogue">{{ line }}</p>
+        {% endfor %}
+      {% endif %}
+      <details>
+        <summary>Image prompt</summary>
+        <p>{{ panel.image_prompt }}</p>
+      </details>
+    </div>
+  </article>
+{% endfor %}
+</section>
+{% endblock %}
